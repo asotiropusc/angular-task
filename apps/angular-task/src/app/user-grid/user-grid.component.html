@@ -1,0 +1,5 @@
+@if (store.filteredUsers().length) {
+    @for (user of store.filteredUsers(); track user.id) {
+        <user-grid-card></user-grid-card>
+    }
+}
