@@ -1,18 +1,25 @@
-<div class="mb-4 p-8 flex items-center justify-center">
-    <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
-        <ng-template pTemplate="header">
-            <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-        </ng-template>
-        <ng-template pTemplate="title"> Advanced Card </ng-template>
-        <ng-template pTemplate="subtitle"> Card subtitle </ng-template>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat
-            libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-        </p>
-        <ng-template pTemplate="footer">
-            <div class="flex gap-4 mt-1">
-                <favorites-button></favorites-button>
-            </div>
-        </ng-template>
-    </p-card>
-</div>
+<p-card
+    (click)="navigateToUserDetail(user.id)"
+    [style]="{ width: '25rem', overflow: 'hidden', cursor: 'pointer' }"
+    data-cy="user-grid-card"
+    styleClass="transition transform duration-300 hover:scale-105 hover:shadow-lg"
+>
+    <ng-template pTemplate="header">
+        <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/galleria/galleria{{ user.id }}.jpg" />
+    </ng-template>
+    <ng-template pTemplate="title"> {{ user.name }} </ng-template>
+    <ng-template pTemplate="subtitle"> &commat;{{ user.username }} </ng-template>
+    <div class="flex items-center gap-2">
+        <p-tag icon="pi pi-building" value="Company" />
+        <p-tag data-cy="grid-card-company-name" severity="secondary" value="{{ user.company.name }}" />
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end">
+            <favorites-button
+                (click)="$event.stopPropagation()"
+                (toggledFavorite)="toggleFavorite(user.id)"
+                [isFavorited]="store.isFavorite(user.id)"
+            />
+        </div>
+    </ng-template>
+</p-card>

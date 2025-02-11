@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
+
+type Severity = 'secondary' | 'warn';
 
 @Component({
     selector: 'favorites-button',
@@ -10,14 +12,26 @@ import { ButtonModule } from 'primeng/button';
     styleUrl: './favorites-button.component.scss',
 })
 export class FavoritesButtonComponent {
-	@Input() isFavorited: boolean = false;
-	@Output() toggledFavorite = new EventEmitter<void>();
 
-	get favoriteIconStyle(): string {
-		return this.isFavorited ? 'pi pi-star-filled' : 'pi pi-star';
-	}
+    @Input() isFavorited = false;
+    @Output() toggledFavorite = new EventEmitter<void>();
 
-	toggle() {
-		this.toggledFavorite.emit();
-	}
+    get favoriteIconStyle (): string {
+
+        return this.isFavorited ? 'pi pi-star-fill' : 'pi pi-star';
+
+    }
+
+    get severity (): Severity {
+
+        return this.isFavorited ? 'warn' : 'secondary';
+
+    }
+
+    toggle () {
+
+        this.toggledFavorite.emit();
+
+    }
+
 }

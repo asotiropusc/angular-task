@@ -1,1 +1,55 @@
-<p>user-detail works!</p>
+<div class="w-3/4 mx-auto min-h-screen flex flex-col items-center">
+    <h1 class="text-5xl font-semibold text-left w-full my-6">User Details</h1>
+    <p-card [style]="{ width: '100%' }" class="shadow-lg p-6">
+        @if (user(); as user) {
+            <ng-template pTemplate="header">
+                <p-tag class="ml-4 mt-4" severity="info" value="User Profile" />
+
+                <div class="flex flex-col items-center gap-3">
+                    <p-avatar image="https://primefaces.org/cdn/primeng/images/galleria/galleria{{ user.id }}.jpg" shape="circle" size="xlarge" />
+                    <h2 class="text-2xl font-semibold">{{ user.name }}</h2>
+                    <p class="text-gray-500 text-lg">&commat;{{ user.username }}</p>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div class="flex items-center gap-2">
+                        <p-tag icon="pi pi-inbox" value="Email" />
+                        <p-tag data-cy="detail-user-email" severity="secondary" value="{{ user.email }}" />
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <p-tag icon="pi pi-phone" value="Phone" />
+                        <p-tag data-cy="detail-user-phone" severity="secondary" value="{{ user.phone }}" />
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <p-tag icon="pi pi-link" value="Website" />
+                        <p-tag severity="secondary">
+                            <a [href]="'https://' + user.website" class="text-blue-500 underline" data-cy="detail-user-website" target="_blank">
+                                {{ user.website }}
+                            </a>
+                        </p-tag>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <p-tag icon="pi pi-building" value="Company" />
+                        <p-tag data-cy="detail-user-company" severity="secondary" value="{{ user?.company?.name }}" />
+                    </div>
+
+                    <div class="flex items-center gap-2 col-span-1 md:col-span-2">
+                        <p-tag icon="pi pi-map-marker" value="Address" />
+                        <p-tag data-cy="detail-user-address" severity="secondary" value="{{ user?.address?.street }}, {{ user?.address?.city }}" />
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <div class="flex justify-end mt-4 md:mt-0">
+                    <favorites-button (toggledFavorite)="toggleFavorite(user.id)" [isFavorited]="store.isFavorite(user.id)" />
+                </div>
+            </ng-template>
+        }
+    </p-card>
+</div>

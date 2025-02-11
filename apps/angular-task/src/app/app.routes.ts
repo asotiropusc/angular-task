@@ -4,15 +4,6 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 export const appRoutes: Route[] = [
     { path: '', pathMatch: 'full', redirectTo: 'users' },
-    {
-        path: 'users',
-        component: UserGridComponent,
-        // TODO: determine if i want to add lazy loading.
-        children: [
-            {
-                path: ':id',
-                component: UserDetailComponent,
-            },
-        ],
-    },
+    { path: 'users', component: UserGridComponent },
+    { path: 'users/:id', component: UserDetailComponent }
 ];

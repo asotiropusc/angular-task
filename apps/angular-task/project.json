@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "crx",
   "sourceRoot": "apps/angular-task/src",
-  "tags": [],
+  "tags": ["type:feature"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
@@ -22,7 +22,7 @@
             "input": "apps/angular-task/public"
           }
         ],
-        "styles": ["@angular/material/prebuilt-themes/azure-blue.css", "apps/angular-task/src/styles.scss"],
+        "styles": ["apps/angular-task/src/styles.scss"],
         "scripts": [],
         "server": "apps/angular-task/src/main.server.ts",
         "prerender": false,

@@ -1,5 +1,25 @@
-@if (store.filteredUsers().length) {
-    @for (user of store.filteredUsers(); track user.id) {
-        <user-grid-card></user-grid-card>
+<div class="mx-auto max-w-4xl">
+    <h1 class="text-center text-5xl font-semibold md:text-left mt-12 mb-6">User Management</h1>
+
+    <form [formGroup]="formGroup" class="mt-6 mb-6 flex justify-center md:justify-end">
+        <p-selectbutton
+            [allowEmpty]="false"
+            [options]="stateOptions"
+            data-cy="filter-group"
+            formControlName="filter"
+            optionLabel="label"
+            optionValue="value"
+        />
+    </form>
+    @if (filteredUsers().length) {
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6">
+            @for (row of filteredUsers(); track row) {
+                @for (user of row; track user; let idx = $index) {
+                    <user-grid-card [class]="{ 'justify-self-center': true, 'md:justify-self-end': idx % 2 === 1 }" [user]="user" />
+                }
+            }
+        </div>
+    } @else {
+        <empty-state [message]="emptyStateMessage" />
     }
-}
+</div>

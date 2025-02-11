@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@angular-task/empty-state": ["libs/components/empty-state/src/index.ts"],
       "@angular-task/favorites-button": ["libs/components/favorites-button/src/index.ts"],
+      "@angular-task/toast-message": ["libs/services/toast-message/src/index.ts"],
       "@angular-task/user": ["libs/services/user/src/index.ts"]
     }
   },
