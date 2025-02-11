@@ -4,6 +4,8 @@ describe('Favorite Hydration Tests', () => {
 
         cy.visit('/');
 
+        cy.getDataCy('user-grid-card').should('have.length', 10);
+
         // favorite one user
         cy.getDataCy('favorite-button').eq(0).click();
         cy.getDataCy('global-toast').should('be.visible');

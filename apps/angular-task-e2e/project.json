@@ -11,21 +11,18 @@
       "options": {
         "cypressConfig": "apps/angular-task-e2e/cypress.config.ts",
         "devServerTarget": "angular-task:serve",
-        "headed": true
-      },
-      "e2e-ci": {
-        "executor": "@nx/cypress:cypress",
-        "options": {
-          "cypressConfig": "apps/angular-task-e2e/cypress.config.ts",
-          "devServerTarget": "angular-task:serve",
-          "headless": true
-        },
-        "configurations": {
-          "ci": {
-            "headless": true
-          }
-        }
+		"watch": true
       }
-    }
+    },
+	"e2e-ci": {
+	  "executor": "@nx/cypress:cypress",
+	  "options": {
+		"cypressConfig": "apps/angular-task-e2e/cypress.config.ts",
+		"devServerTarget": "angular-task:serve"
+	  },
+	  "configurations": {
+		"ci": {}
+	  }
+	}
   }
 }

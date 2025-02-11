@@ -1,6 +1,13 @@
 describe('User Grid Tests', () => {
 
-    beforeEach(() => cy.visit('/'));
+    beforeEach(() => {
+
+        cy.visit('/');
+
+        // ensure page is properly visible to reduce flake
+        cy.getDataCy('user-grid-card').should('have.length', 10);
+
+    });
 
     it('should display user grid', () => {
 
@@ -52,9 +59,11 @@ describe('User Grid Tests', () => {
         cy.getDataCy('filter-group').find('p-togglebutton button').eq(0)
         .should('contain', 'All')
         .and('have.attr', 'data-p-checked', 'true');
+
         cy.getDataCy('filter-group').find('p-togglebutton button').eq(1)
         .should('contain', 'Favorites')
         .and('have.attr', 'data-p-checked', 'false');
+
         cy.getDataCy('filter-group').find('p-togglebutton button').eq(2)
         .should('contain', 'Non-Favorites')
         .and('have.attr', 'data-p-checked', 'false');

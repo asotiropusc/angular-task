@@ -18,7 +18,7 @@ import { ToastMessageService } from '@angular-task/toast-message';
 })
 export class UserGridCardComponent {
 
-    @Input({ required: true }) user: User;
+    @Input({ required: true }) user: User = {} as User;
 
     store = inject(UsersStore);
     router = inject(Router);

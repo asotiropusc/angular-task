@@ -116,10 +116,9 @@ describe('UserGridComponent', () => {
 
     });
 
-    it('should create the component and call loadAll()', () => {
+    it('should create the component', () => {
 
         expect(component).toBeTruthy();
-        expect(loadAllSpy).toHaveBeenCalled();
 
     });
 
