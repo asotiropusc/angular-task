@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Filter, UsersStore } from '../store/app.store';
 import { UserGridCardComponent } from './user-grid-card/user-grid-card.component';
@@ -6,6 +6,7 @@ import { SelectButton } from 'primeng/selectbutton';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '@angular-task/user';
 import { EmptyStateComponent } from '@angular-task/empty-state';
+import { Subject, takeUntil } from 'rxjs';
 
 interface SelectOption {
     label: string,
@@ -19,9 +20,11 @@ interface SelectOption {
     templateUrl: './user-grid.component.html',
     styleUrl: './user-grid.component.scss',
 })
-export class UserGridComponent implements OnInit {
+export class UserGridComponent implements OnInit, OnDestroy {
 
     store = inject(UsersStore);
+
+    destroy$ = new Subject<void>();
 
     filterSignal = signal<Filter>('all');
 
@@ -82,7 +85,15 @@ export class UserGridComponent implements OnInit {
 
     ngOnInit (): void {
 
-        this.formGroup.get('filter')?.valueChanges.subscribe((value) => this.filterSignal.set(value as Filter));
+        this.formGroup.get('filter')?.valueChanges
+        .pipe(takeUntil(this.destroy$)).subscribe((value) => this.filterSignal.set(value as Filter));
+
+    }
+
+    ngOnDestroy (): void {
+
+        this.destroy$.next();
+        this.destroy$.complete();
 
     }
 

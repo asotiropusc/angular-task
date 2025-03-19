@@ -4,6 +4,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 export const appRoutes: Route[] = [
     { path: '', pathMatch: 'full', redirectTo: 'users' },
-    { path: 'users', component: UserGridComponent },
-    { path: 'users/:id', component: UserDetailComponent }
+    { path: 'users', children: [
+        { path: '', component: UserGridComponent },
+        { path: ':id', component: UserDetailComponent, data: { breadcrumb: 'User Detail' } }
+    ] }
 ];

@@ -10,4 +10,4 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
-Cypress.Commands.add('getDataCy', (selector, ...args) => cy.get(`[data-cy=${selector}]`, ...args));
+Cypress.Commands.add('getDataCy', (selector) => cy.get(`[data-cy=${selector}]`));
