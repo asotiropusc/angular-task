@@ -167,7 +167,16 @@
             "maxBOF": 0
           }
         ],
-        "no-restricted-globals": ["error", "document", "window", "localStorage", "sessionStorage"],
+        "no-restricted-globals": [
+          "error",
+          "document",
+          "window",
+          "sessionStorage",
+          {
+            "name": "localStorage",
+            "message": "Use the LocalStorageService instead of accessing localStorage directly."
+          }
+        ],
         "no-restricted-syntax": ["error", "PropertyDefinition[definite = true]"],
         "no-trailing-spaces": [
           "error",

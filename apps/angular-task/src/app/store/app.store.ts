@@ -1,10 +1,10 @@
 import { patchState, signalStore, withMethods, withState, withHooks } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { User, UserService } from '@angular-task/user';
-import { effect, inject, PLATFORM_ID } from '@angular/core';
+import { effect, inject } from '@angular/core';
 import { exhaustMap, pipe, tap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
-import { isPlatformBrowser } from '@angular/common';
+import { LocalStorageService } from '@angular-task/local-storage';
 
 export type Filter = 'all' | 'favorite' | 'non-favorite';
 
@@ -56,29 +56,22 @@ export const UsersStore = signalStore(
     withHooks({
         onInit (store) {
 
-            const platformId = inject(PLATFORM_ID);
-
             store.loadAll();
 
-            if (isPlatformBrowser(platformId)) {
+            const localStorageService = inject(LocalStorageService);
+            const savedFavorites = localStorageService.getItem('favorites');
+            if (savedFavorites) {
 
-                // eslint-disable-next-line no-restricted-globals
-                const savedFavorites = localStorage.getItem('favorites');
-                if (savedFavorites) {
-
-                    patchState(store, { favorites: JSON.parse(savedFavorites) });
-
-                }
-
-                effect(() => {
-
-                    const favorites = store.favorites();
-                    // eslint-disable-next-line no-restricted-globals
-                    localStorage.setItem('favorites', JSON.stringify(favorites));
-
-                });
+                patchState(store, { favorites: JSON.parse(savedFavorites) });
 
             }
+
+            effect(() => {
+
+                const favorites = store.favorites();
+                localStorageService.setItem('favorites', JSON.stringify(favorites));
+
+            });
 
         }
     })
