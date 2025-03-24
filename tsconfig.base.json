@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@angular-task/breadcrumb": ["libs/services/breadcrumb/src/index.ts"],
       "@angular-task/empty-state": ["libs/components/empty-state/src/index.ts"],
       "@angular-task/favorites-button": ["libs/components/favorites-button/src/index.ts"],
       "@angular-task/local-storage": ["libs/services/local-storage/src/index.ts"],

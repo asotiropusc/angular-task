@@ -19,9 +19,9 @@ import { ToastMessageService } from '@angular-task/toast-message';
 })
 export class UserDetailComponent {
 
-    store = inject(UsersStore);
-    route = inject(ActivatedRoute);
-    toastService = inject(ToastMessageService);
+    readonly store = inject(UsersStore);
+    private readonly route = inject(ActivatedRoute);
+    private readonly toastService = inject(ToastMessageService);
 
     user = toSignal(this.route.paramMap.pipe(
         map((params) => params.get('id')),
@@ -33,7 +33,14 @@ export class UserDetailComponent {
 
         this.store.toggleFavorite(id);
         const isFavorite = this.store.isFavorite(id);
-        this.toastService.showFavoriteToast(this.user()?.name as string, isFavorite);
+        const user = this.user();
+
+        if (!user) {
+
+            return;
+
+        }
+        this.toastService.showFavoriteToast(user.name, isFavorite);
 
     }
 

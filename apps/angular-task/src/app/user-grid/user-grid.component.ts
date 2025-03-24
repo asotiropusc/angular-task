@@ -1,12 +1,14 @@
 import { Component, computed, inject, OnInit, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Filter, UsersStore } from '../store/app.store';
+import { UsersStore } from '../store/app.store';
 import { UserGridCardComponent } from './user-grid-card/user-grid-card.component';
 import { SelectButton } from 'primeng/selectbutton';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '@angular-task/user';
 import { EmptyStateComponent } from '@angular-task/empty-state';
 import { Subject, takeUntil } from 'rxjs';
+
+type Filter = 'all' | 'favorite' | 'non-favorite';
 
 interface SelectOption {
     label: string,
@@ -65,7 +67,7 @@ export class UserGridComponent implements OnInit, OnDestroy {
     ];
 
     formGroup = new FormGroup({
-        filter: new FormControl('all')
+        filter: new FormControl<Filter>('all', { nonNullable: true })
     });
 
     get emptyStateMessage (): string {
@@ -85,8 +87,14 @@ export class UserGridComponent implements OnInit, OnDestroy {
 
     ngOnInit (): void {
 
-        this.formGroup.get('filter')?.valueChanges
-        .pipe(takeUntil(this.destroy$)).subscribe((value) => this.filterSignal.set(value as Filter));
+        const filterControl = this.formGroup.controls.filter;
+
+        filterControl.valueChanges
+        .pipe(takeUntil(this.destroy$)).subscribe((value) => {
+
+            this.filterSignal.set(value);
+
+        });
 
     }
 

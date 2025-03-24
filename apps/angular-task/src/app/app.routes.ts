@@ -6,6 +6,6 @@ export const appRoutes: Route[] = [
     { path: '', pathMatch: 'full', redirectTo: 'users' },
     { path: 'users', children: [
         { path: '', component: UserGridComponent },
-        { path: ':id', component: UserDetailComponent, data: { breadcrumb: 'User Detail' } }
+        { path: ':id', component: UserDetailComponent, data: { breadcrumb: 'User Details' } }
     ] }
 ];

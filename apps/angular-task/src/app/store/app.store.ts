@@ -6,8 +6,6 @@ import { exhaustMap, pipe, tap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 import { LocalStorageService } from '@angular-task/local-storage';
 
-export type Filter = 'all' | 'favorite' | 'non-favorite';
-
 interface UserState {
     users: User[];
     isLoading: boolean;
@@ -24,7 +22,7 @@ const initialState: UserState = {
 
 // https://ngrx.io/guide/signals/signal-store#defining-store-methods
 export const UsersStore = signalStore(
-    { providedIn: 'root', protectedState: false },
+    { providedIn: 'root' },
     withState(initialState),
     withMethods((store, userService = inject(UserService)) => ({
         loadAll: rxMethod<void>(pipe(

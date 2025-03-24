@@ -18,19 +18,25 @@ import { ToastMessageService } from '@angular-task/toast-message';
 })
 export class UserGridCardComponent {
 
-    @Input({ required: true }) user: User = {} as User;
+    @Input({ required: true }) user: User | undefined;
 
-    store = inject(UsersStore);
-    router = inject(Router);
-    toastService = inject(ToastMessageService);
+    readonly store = inject(UsersStore);
+    private readonly router = inject(Router);
+    private readonly toastService = inject(ToastMessageService);
 
-    navigateToUserDetail (id: number) {
+    navigateToUserDetail (id: number): void {
 
         this.router.navigate(['/users', id]);
 
     }
 
-    toggleFavorite (id: number) {
+    toggleFavorite (id: number): void {
+
+        if (!this.user) {
+
+            return;
+
+        }
 
         this.store.toggleFavorite(id);
 
