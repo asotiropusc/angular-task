@@ -2,7 +2,7 @@
   "name": "angular-task",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "crx",
+  "prefix": "",
   "sourceRoot": "apps/angular-task/src",
   "tags": ["type:feature"],
   "targets": {

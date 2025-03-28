@@ -1,4 +1,6 @@
 {
   "buildCommand": "npx nx build angular-task --prod",
-  "outputDirectory": "dist/apps/angular-task"
+  "outputDirectory": "dist/apps/angular-task",
+  "framework": "angular",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
