@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npx nx build angular-task --prod",
+  "outputDirectory": "dist/apps/angular-task"
+}
