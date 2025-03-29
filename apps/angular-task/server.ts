@@ -65,8 +65,4 @@ function run (): void {
 
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-
-    run();
-
-}
+run();
