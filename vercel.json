@@ -1,6 +1,8 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/index.csr.html" },
-    { "source": "/(.*)", "destination": "/index.csr.html" }
-  ]
+  "functions": {
+    "api/ssr.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/ssr.js" }]
 }
